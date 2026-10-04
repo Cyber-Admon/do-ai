@@ -1,17 +1,7 @@
-import os
-
 from fastapi import FastAPI, HTTPException
-from sqlalchemy import create_engine, text
+from sqlalchemy import text
 
-
-def get_database_url() -> str:
-    url = os.environ["DATABASE_URL"]
-    if url.startswith("postgresql://"):
-        url = url.replace("postgresql://", "postgresql+psycopg://", 1)
-    return url
-
-
-engine = create_engine(get_database_url(), pool_pre_ping=True)
+from app.db import engine
 
 app = FastAPI(title="Do")
 

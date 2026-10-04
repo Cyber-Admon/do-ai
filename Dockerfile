@@ -11,6 +11,8 @@ COPY requirements.txt .
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install -r requirements.txt
 
+COPY alembic.ini .
+COPY migrations ./migrations
 COPY app ./app
 
 EXPOSE 8000
