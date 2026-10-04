@@ -1,0 +1,20 @@
+salary
+payroll
+password
+passcode
+credentials
+api key
+private key
+secret
+token
+cap table
+valuation
+term sheet
+shareholder
+equity
+confidential
+bank account
+account number
+bvn
+nin
+otp

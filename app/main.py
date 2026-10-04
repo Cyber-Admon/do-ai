@@ -1,3 +1,6 @@
+import logging
+from contextlib import asynccontextmanager
+
 import httpx
 from fastapi import FastAPI, HTTPException
 from sqlalchemy import select, text
@@ -6,9 +9,19 @@ from sqlalchemy.orm import Session
 from app.clickup import ClickUpClient, ClickUpError
 from app.db import engine
 from app.models import Task
+from app.slack_bot import start_slack
 from app.sync import sync_tasks
 
-app = FastAPI(title="Do")
+logging.basicConfig(level=logging.INFO)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    start_slack()
+    yield
+
+
+app = FastAPI(title="Do", lifespan=lifespan)
 
 
 @app.get("/")
